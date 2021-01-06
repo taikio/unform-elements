@@ -37,7 +37,6 @@ export default function Input({ name, label, isUppercase, ...rest }) {
         name={name} 
         defaultValue={defaultValue}
         onBlur={toInputUppercase}
-        required
         autocomplete="off"
         {...rest}
       />

@@ -13,7 +13,7 @@ export const InputContainer = styled.div`
     transition: .2s ease-in-out;
     box-sizing: border-box;
     font-size: 15px;
-    height: 3rem;
+    height: 40px;
     padding-bottom: -10px;
     padding-left: 10px;
     text-transform: uppercase;
@@ -28,7 +28,7 @@ export const InputContainer = styled.div`
   }
 
   label {
-    top: 14px;
+    top: 12px;
     left: 10px;
     right: 0;
     color: #616161;
@@ -36,13 +36,13 @@ export const InputContainer = styled.div`
     align-items: flex-start;
     justify-content: space-between;
     position: absolute;
-    font-size: 16px;
+    font-size: 15px;
     cursor: text;
     transition: .2s ease-in-out;
     box-sizing: border-box;
-    height: 2rem;
+    height: 18px;
     background-color: #fff;
-    width: 95%;
+    width: 94%;
     padding: 0 4px 0 4px;
 
     ${(props) => 
