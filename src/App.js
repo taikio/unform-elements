@@ -1,15 +1,49 @@
+import { useRef } from 'react';
 import logo from './logo.svg';
-import './App.css';
-import Input from './Components/Input';
 import { Form } from '@unform/web';
+import * as Yup from 'yup';
+
+import Input from './Components/Input';
+
+import './App.css';
+
 
 function App() {
+  const formRef = useRef(null);
+
+  const handleSubmit = async (formData) => {
+    try {
+      formRef.current.setErrors({});
+
+      const schemaCad = Yup.object().shape({
+        nome: Yup.string().required('Campo Obrigatório'),
+        email: Yup.string().required('Campo Obrigatório'),
+        login: Yup.string().required('Campo Obrigatório'),
+        senha: Yup.string().required('Campo Obrigatório'),
+      });
+
+      await schemaCad.validate(formData, {
+        abortEarly: false,
+      });
+    } catch (err) {
+      const validationErrors = {};
+
+      if (err instanceof Yup.ValidationError) {
+        err.inner.forEach((error) => {
+          validationErrors[error.path] = error.message;
+        });
+
+        formRef.current.setErrors(validationErrors);
+      }
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />        
       </header>
-      <Form>
+      <Form ref={formRef} onSubmit={handleSubmit}>
         <section className="App-body">
           <div className="row">
             <div className="col">
@@ -30,6 +64,11 @@ function App() {
             </div>
             <div className="col">
               <Input type="password" name="senha" label="Senha" />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <button type="submit">Salvar Cadastro</button>
             </div>
           </div>
         </section>

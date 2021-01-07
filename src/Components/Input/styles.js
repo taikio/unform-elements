@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { headShakeEffect } from '../../styles/animations';
 
 export const InputContainer = styled.div`
   display: flex;
@@ -25,6 +26,15 @@ export const InputContainer = styled.div`
       border: 1px solid ${(props) => (props.invalid ? 'red' : '#610989')};
       box-shadow: 1px 1px 6px 1px #b1b1b1;
     }
+
+    ${(props) =>
+      props.invalid 
+        ? css`
+          animation: 0.6s ${headShakeEffect};
+        `
+        :
+        css`animation: none;`
+      }
   }
 
   label {
@@ -55,8 +65,9 @@ export const InputContainer = styled.div`
       `}
   }
 
-  label.error {
+  span.error {
     color: red;
+    font-size: 13px;
   }
 
   input:focus + label {
